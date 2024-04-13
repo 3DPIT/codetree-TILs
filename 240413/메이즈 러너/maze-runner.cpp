@@ -77,7 +77,7 @@ void rotation(int y, int x, int w) {
 //정사각형 뽑기
 Square squareSelect() {
 
-	for (int n = 2; n <= 10; n++) {
+	for (int n = 2; n <= N; n++) {
 
 		for (int i = 0; i < N; i++)
 		{
@@ -119,8 +119,6 @@ Square squareSelect() {
 
 void check() {
 	for (int n = 2; n <= 2; n++) {
-
-
 		for (int i = 0; i < N; i++)
 		{
 			for (int j = 0; j < N; j++)
@@ -176,18 +174,24 @@ bool safeZone(int y, int x) {
 void play() {
 	//이동
 	
+	int finishFlag = 0;
 	while (K--) {
-		int outCount = 0;
 		for (int i = 0; i < v.size(); i++) {
 
 
 			int cy = v[i].y;
 			int cx = v[i].x;
-			if (v[i].isNotValid == 1) {
-				outCount++;
-				continue;
+			int outCount = 0;
+			for(int j=0;j<v.size();j++){
+				if (v[j].isNotValid == 1) {
+					outCount++;
+				}
 			}
-			if (outCount == v.size()) break;
+
+			if (outCount == v.size()) {
+				finishFlag = 1;
+				break;
+			}
 			int beforeShortDistance = distanceCal(cy, cx);
 
 			for (int d = 0; d < 4; d++) {
@@ -218,7 +222,7 @@ void play() {
 		//
 
 
-
+		if (finishFlag) break;
 
 		Square square = squareSelect();
 		rotation(square.y, square.x, square.n);
