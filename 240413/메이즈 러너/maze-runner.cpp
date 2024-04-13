@@ -50,7 +50,6 @@ void rotation(int y, int x, int w) {
 	for (int i = 0; i < w; i++) {
 		for (int j = 0; j < w; j++)
 		{
-			
 			if (copyArr[i][j] <10&&copyArr[i][j] != -1 && copyArr[i][j] != 0) copyArr[i][j]--;
 			rotationArr[j][w - i - 1] = copyArr[i][j];
 		} 
@@ -110,6 +109,7 @@ Square squareSelect() {
 					s.x = j;
 					s.n = n;
 					return s;
+					break;
 				}
 			}
 		}
