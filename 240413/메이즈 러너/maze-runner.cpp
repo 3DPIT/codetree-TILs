@@ -179,7 +179,7 @@ bool safeZone(int y, int x) {
 }
 void play() {
 	//이동
-
+	int finishFlag = 0;
 	while (K--) {
 		int outCount = 0;
 		for (int j = 0; j < v.size(); j++) {
@@ -187,9 +187,17 @@ void play() {
 				outCount++;
 			}
 		}
-		if (outCount == v.size())break;
+		if (outCount == v.size()) {
+			finishFlag = 1;
+			break;
+		}
 		for (int i = 0; i < v.size(); i++) {
-
+			outCount = 0;
+			for (int j = 0; j < v.size(); j++) {
+				if (v[j].isNotValid == 1) {
+					outCount++;
+				}
+			}
 
 			int cy = v[i].y;
 			int cx = v[i].x;
@@ -225,12 +233,13 @@ void play() {
 				}
 			}
 		}
-
+		if (finishFlag)break;
 
 
 
 		Square square = squareSelect();
 		rotation(square.y, square.x, square.n);
+
  	}
 
 }
