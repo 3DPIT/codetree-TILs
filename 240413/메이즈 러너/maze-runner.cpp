@@ -88,7 +88,7 @@ Square squareSelect() {
 				int flag = 0;
 				for (int ii = i; ii < i + n; ii++) {
 					for (int jj = j; jj < j + n; jj++) {
-						if (ii < 0 || ii == N || jj < 0 || jj == N) {
+						if (ii < 0 || ii >= N || jj < 0 || jj >= N) {
 							flag = 1;
 							break;
 						}
@@ -114,7 +114,11 @@ Square squareSelect() {
 			}
 		}
 	}
-
+	Square s;
+	s.y = 0;
+	s.x = 0;
+	s.n = 0;
+	return s;
 }
 
 void check() {
@@ -178,6 +182,12 @@ void play() {
 
 	while (K--) {
 		int outCount = 0;
+		for (int j = 0; j < v.size(); j++) {
+			if (v[j].isNotValid == 1) {
+				outCount++;
+			}
+		}
+		if (outCount == v.size())break;
 		for (int i = 0; i < v.size(); i++) {
 
 
@@ -216,21 +226,12 @@ void play() {
 			}
 		}
 
-		//
-		 outCount = 0;
-		for (int j = 0; j < v.size(); j++) {
-			if (v[j].isNotValid == 1) {
-				outCount++;
-			}
-		}
-		if (outCount == v.size())break;
+
 
 
 		Square square = squareSelect();
 		rotation(square.y, square.x, square.n);
-
-		int a = 0;
-	}
+ 	}
 
 }
 int main(void) {
