@@ -23,7 +23,7 @@ struct Square {
 
 struct POS {
 	int y, x;
-	int isNotValid ;
+	int isNotValid;
 	int number;
 };
 vector<POS> v;
@@ -37,7 +37,7 @@ POS exitPos;
 
 //회전 구현
 void rotation(int y, int x, int w) {
-	int copyArr[50][50] = { 0 ,};
+	int copyArr[50][50] = { 0 , };
 
 	for (int i = 0; i < w; i++) {
 		for (int j = 0; j < w; j++) {
@@ -50,9 +50,9 @@ void rotation(int y, int x, int w) {
 	for (int i = 0; i < w; i++) {
 		for (int j = 0; j < w; j++)
 		{
-			if (copyArr[i][j] <10&&copyArr[i][j] != -1 && copyArr[i][j] != 0) copyArr[i][j]--;
+			if (copyArr[i][j] < 10 && copyArr[i][j] != -1 && copyArr[i][j] != 0) copyArr[i][j]--;
 			rotationArr[j][w - i - 1] = copyArr[i][j];
-		} 
+		}
 	}
 
 	for (int i = 0; i < w; i++) {
@@ -70,14 +70,14 @@ void rotation(int y, int x, int w) {
 	}
 
 
-	
+
 }
 
 
 //정사각형 뽑기
 Square squareSelect() {
 
-	for (int n = 2; n <= N; n++) {
+	for (int n = 2; n <= 10; n++) {
 
 		for (int i = 0; i < N; i++)
 		{
@@ -114,11 +114,13 @@ Square squareSelect() {
 			}
 		}
 	}
-	
+
 }
 
 void check() {
 	for (int n = 2; n <= 2; n++) {
+
+
 		for (int i = 0; i < N; i++)
 		{
 			for (int j = 0; j < N; j++)
@@ -127,11 +129,11 @@ void check() {
 				int isPeople = 0;
 				for (int ii = i; ii < i + n; ii++) {
 					for (int jj = j; jj < j + n; jj++) {
-						printf("[%d, %d] ", ii,jj);
+						printf("[%d, %d] ", ii, jj);
 					}
 					printf("\n");
 				}
-				
+
 			}
 		}
 	}
@@ -148,12 +150,12 @@ void init() {
 			scanf("%d", &arr[i][j]);
 		}
 	}
-	
+
 	for (int i = 0; i < M; i++) {
 		int y, x;
 		scanf("%d %d", &y, &x);
-		arr[y - 1][x - 1] = (i+1)*10;
-		v.push_back({ y-1,x-1,0,(i+1)*10 });
+		arr[y - 1][x - 1] = (i + 1) * 10;
+		v.push_back({ y - 1,x - 1,0,(i + 1) * 10 });
 	}
 
 
@@ -169,29 +171,24 @@ int distanceCal(int y, int x) {
 }
 
 bool safeZone(int y, int x) {
-	return 0 < y || y < N || 0 < x||x < N;
+	return 0 < y || y < N || 0 < x || x < N;
 }
 void play() {
 	//이동
-	
-	int finishFlag = 0;
+
 	while (K--) {
+		int outCount = 0;
 		for (int i = 0; i < v.size(); i++) {
 
 
 			int cy = v[i].y;
 			int cx = v[i].x;
-			int outCount = 0;
-			for(int j=0;j<v.size();j++){
-				if (v[j].isNotValid == 1) {
-					outCount++;
-				}
-			}
 
-			if (outCount == v.size()) {
-				finishFlag = 1;
-				break;
+			if (v[i].isNotValid == 1) {
+				outCount++;
+				continue;
 			}
+			if (outCount == v.size()) break;
 			int beforeShortDistance = distanceCal(cy, cx);
 
 			for (int d = 0; d < 4; d++) {
@@ -199,7 +196,7 @@ void play() {
 				int ny = cy + dy[d];
 				int nx = cx + dx[d];
 				if (!safeZone(ny, nx)) continue;
-				if (arr[ny][nx] == 0||arr[ny][nx]==-1) {
+				if (arr[ny][nx] == 0 || arr[ny][nx] == -1) {
 					int afterShortDistance = distanceCal(ny, nx);
 					if (beforeShortDistance > afterShortDistance) {
 						if (arr[ny][nx] == -1) {
@@ -220,9 +217,14 @@ void play() {
 		}
 
 		//
+		 outCount = 0;
+		for (int j = 0; j < v.size(); j++) {
+			if (v[j].isNotValid == 1) {
+				outCount++;
+			}
+		}
+		if (outCount == v.size())break;
 
-
-		if (finishFlag) break;
 
 		Square square = squareSelect();
 		rotation(square.y, square.x, square.n);
@@ -232,7 +234,7 @@ void play() {
 
 }
 int main(void) {
-	
+
 	int TC = 1;
 	for (int tc = 1; tc <= TC; tc++) {
 		init();
@@ -241,7 +243,7 @@ int main(void) {
 		play();
 
 		printf("%d\n", ret);
-		printf("%d %d\n", exitPos.y+1, exitPos.x+1);
+		printf("%d %d\n", exitPos.y + 1, exitPos.x + 1);
 	}
 	return 0;
 }
