@@ -90,8 +90,8 @@ int main() {
 
 			while (!q.empty()) {
 				Data c = q.front(); q.pop();
-				if ( c.y>maxY){
-				
+				if (c.cnt>maxR&& c.y>maxY){
+					maxR = c.cnt;
 					maxY = c.y;
 					
 				}
