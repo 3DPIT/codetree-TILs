@@ -101,7 +101,7 @@ int main() {
 					n.y = c.y + dy[d];
 					n.x = c.x + dx[d];
 					if (arr[n.y][n.x] != 1&& visit[n.y][n.x] == 0) {
-						if (arr[c.y][c.x] >1000 && arr[n.y][n.x]*1000!= arr[c.y][c.x]) {
+						if (arr[c.y][c.x] >1000 && (arr[n.y][n.x]*1000!= arr[c.y][c.x]|| arr[n.y][n.x] * 1000 == arr[c.y][c.x])) {
 							n.cnt = c.cnt + 1;
 							visit[n.y][n.x] = 1;
 							q.push(n);
