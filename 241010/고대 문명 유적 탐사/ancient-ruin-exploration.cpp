@@ -97,7 +97,7 @@ int bfsCount(bool on) {
 		}
 	}
 
-	if (on) {
+	if (on && retCount>=3) {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (visit[i][j] == 1) {
@@ -192,9 +192,9 @@ int main(void) {
 			//제거 할놈 있으면 제거 하면서 ret+=count;
 		}
 
-		if(ret!=0)
-		cout << ret << " ";
+		if(ret!=0) cout << ret << " ";
 		ret = 0;
+		v.clear();
 	}
 
 	return 0;
