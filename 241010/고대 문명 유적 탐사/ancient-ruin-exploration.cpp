@@ -65,7 +65,8 @@ int bfsCount(bool on) {
 	for (int i = 1; i < 5; i++) {
 		for (int j = 1; j < 5; j++) {
 			if (visit[i][j] == 0) {
-				visit[i][j] = 1;
+				int visit1[7][7] = { 0 };
+				visit1[i][j] = 1;
 				int number = arr[i][j];
 				while (!q.empty()) q.pop();
 				q.push({ i,j,1 });
@@ -81,18 +82,25 @@ int bfsCount(bool on) {
 						n.x = c.x + dx[dir];
 						n.cnt = c.cnt + 1;
 						if (n.y < 0 || n.y == 5 || n.x < 0 || n.x== 5) continue;
-						if (visit[n.y][n.x] == 0 && arr[n.y][n.x] == number) {
+						if (visit1[n.y][n.x] == 0 && arr[n.y][n.x] == number) {
 							cnt++;
-							visit[n.y][n.x] = 1;
+							visit1[n.y][n.x] = 1;
 							q.push(n);
 						}
 					}
 				}//while end
-				if (cnt <3) {
-					visit[i][j] = 0;
-				}
-				else
+		
+				if (cnt >= 3) {
+					for (int i = 0; i < 5; i++) {
+						for (int j = 0; j < 5; j++) {
+							if (visit1[i][j] == 1) {
+								visit[i][j] = visit1[i][j];
+							}
+						}
+					}
 					retCount += cnt;
+
+				}
 			}
 		}
 	}
