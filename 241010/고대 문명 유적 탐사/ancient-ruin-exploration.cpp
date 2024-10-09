@@ -191,8 +191,11 @@ int main(void) {
 			ret += count;
 			//제거 할놈 있으면 제거 하면서 ret+=count;
 		}
+
+		if(ret!=0)
+		cout << ret << " ";
+		ret = 0;
 	}
 
-	cout << ret << endl;
 	return 0;
 }
