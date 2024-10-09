@@ -113,6 +113,7 @@ int bfsCount(bool on) {
 
 int addMaterial() {
 	int size = keys.size();
+	if (size == 0)return -1;
 	for (int j = 0; j <= 4; j++) {
 		for (int i = 4; i >= 0; i--) {
 			if (arr[i][j] == 0) {
@@ -195,6 +196,7 @@ int main(void) {
 		if(ret!=0) cout << ret << " ";
 		ret = 0;
 		v.clear();
+		while (!q.empty())q.pop();
 	}
 
 	return 0;
